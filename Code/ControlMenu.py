@@ -19,27 +19,27 @@ if __name__ == '__main__':
                                                            date3, date4,
                                                            'DATE')
 
-    filtered_data_2018.to_csv("Data/Data_Filtered_By_Date_2018.csv", sep=',',
-                              encoding='utf-8', index=False)
-    filtered_data_2017.to_csv("Data/Data_Filtered_By_Date_2017.csv", sep=',',
-                              encoding='utf-8', index=False)
+    # filtered_data_2018.to_csv("Data/Data_Filtered_By_Date_2018.csv", sep=',',
+    #                           encoding='utf-8', index=False)
+    # filtered_data_2017.to_csv("Data/Data_Filtered_By_Date_2017.csv", sep=',',
+    #                           encoding='utf-8', index=False)
 
     # Presently we are directly using time filtered datasets to save time
-    print("Cleaning 2017 dataset:")
-    filtered_data_2017 = import_object.import_data(
-        "Data/Data_Filtered_By_Date_2017.csv")
+    # print("Cleaning 2017 dataset:")
+    # filtered_data_2017 = import_object.import_data(
+    #     "../Data/Data_Filtered_By_Date_2017.csv")
     # filtered_data_2017 = filtered_data_2017.head(10000)
 
     fully_cleaned = import_object.clean_time_filtered_dataset(
         filtered_data_2017)
-    fully_cleaned.to_csv("Data/Data_Filtered_By_Date_2017_cleaned.csv",
-                         sep=',', encoding='utf-8', index=False)
+    # fully_cleaned.to_csv("Data/Data_Filtered_By_Date_2017_cleaned.csv",
+    #                      sep=',', encoding='utf-8', index=False)
 
-    print()
-    print("Cleaning 2018 dataset:")
-    filtered_data_2018 = import_object.import_data(
-        "Data/Data_Filtered_By_Date_2018.csv")
+    # print()
+    # print("Cleaning 2018 dataset:")
+    # filtered_data_2018 = import_object.import_data(
+    #     "../Data/Data_Filtered_By_Date_2018.csv")
     fully_cleaned = import_object.clean_time_filtered_dataset(
         filtered_data_2018)
-    fully_cleaned.to_csv("Data/Data_Filtered_By_Date_2018_cleaned.csv",
-                         sep=',', encoding='utf-8', index=False)
+    # fully_cleaned.to_csv("Data/Data_Filtered_By_Date_2018_cleaned.csv",
+    #                      sep=',', encoding='utf-8', index=False)
