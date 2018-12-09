@@ -1,4 +1,6 @@
 from Code.DataCleaner import DataCleaner
+from Code.DataVisualizer import DataVisualizer
+from Code.DataCluster import DataCluster
 
 if __name__ == '__main__':
     import_object = DataCleaner()
