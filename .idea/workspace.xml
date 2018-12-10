@@ -2,12 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6eef1649-c328-47d8-8ba7-7ad8e9b6eb66" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Code/ControlMenu.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/ControlMenu.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Code/Data_Import_And_Clean.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/Data_Import_And_Clean.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Data_Filtered_By_Date_2017_cleaned.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Data_Filtered_By_Date_2017_cleaned.csv" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Data/Data_Filtered_By_Date_2018_cleaned.csv" beforeDir="false" afterPath="$PROJECT_DIR$/Data/Data_Filtered_By_Date_2018_cleaned.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/DataCluster.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/DataCluster.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/DataVisualizer.py" beforeDir="false" afterPath="$PROJECT_DIR$/Code/DataVisualizer.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Code/Data_Import_And_Clean.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -17,35 +16,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Code/Data_Import_And_Clean.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="573">
-              <caret line="941" lean-forward="true" selection-start-line="941" selection-end-line="941" />
-              <folding>
-                <element signature="e#0#15#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Code/ControlMenu.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
-              <folding>
-                <element signature="e#0#40#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/DataCleaner.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-8357">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
+            <state relative-caret-position="570">
+              <caret line="462" column="50" selection-start-line="462" selection-start-column="50" selection-end-line="462" selection-end-column="50" />
               <folding>
                 <element signature="e#0#19#0" expanded="true" />
               </folding>
@@ -56,8 +31,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/DataVisualizer.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="114">
-              <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
+            <state relative-caret-position="280">
+              <caret line="27" column="24" lean-forward="true" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -65,8 +43,23 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Code/DataCluster.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+            <state relative-caret-position="193">
+              <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+              <folding>
+                <element signature="e#0#34#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Code/ControlMenu.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="2261">
+              <caret line="119" column="51" lean-forward="true" selection-start-line="119" selection-start-column="51" selection-end-line="119" selection-end-column="51" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -82,17 +75,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>clean_time_filtered_dataset</find>
-      <find>l_</find>
-      <find>fill_all_empty_boroughs</find>
-      <find>&quot;NA&quot;</find>
-      <find>Legitim</find>
-      <find>remove_by_key</find>
-      <find>add_borough_zip_by_lat_lon</find>
-      <find>Sum of nas</find>
-      <find>NA</find>
-      <find>NA&quot;</find>
-      <find>Prediction</find>
       <find>Pred</find>
       <find>Unique Keys for records with incorrect GPS co-ordinates</find>
       <find>remove_unusable_records</find>
@@ -111,7 +93,18 @@
       <find>remove_incorrect_gps_records</find>
       <find>less_and_high_accident_occurrences_with_dates(borough_accident_2017, &quot;2017&quot;)</find>
       <find>High Accidents in</find>
+      <find>clusterin</find>
+      <find>`</find>
+      <find>plot_hourly_distribution_graph</find>
+      <find>collect</find>
+      <find>no_of_accidents_dates</find>
+      <find>perform_clustering_kMeans</find>
+      <find>factor_vehicle_accidents_graph</find>
       <find>less_and_high_accident_occurrences_with_dates</find>
+      <find>weekda</find>
+      <find>Heat map of June &amp; july 2018</find>
+      <find>heat map</find>
+      <find>bins</find>
     </findStrings>
     <replaceStrings>
       <replace>,</replace>
@@ -126,19 +119,19 @@
         <option value="$PROJECT_DIR$/Main.py" />
         <option value="$PROJECT_DIR$/Code/pract.py" />
         <option value="$PROJECT_DIR$/Code/Trial.py" />
-        <option value="$PROJECT_DIR$/Code/DataCleaner.py" />
-        <option value="$PROJECT_DIR$/Code/DataVisualizer.py" />
-        <option value="$PROJECT_DIR$/Code/DataCluster.py" />
-        <option value="$PROJECT_DIR$/Code/ControlMenu.py" />
         <option value="$PROJECT_DIR$/Code/Data_Import_And_Clean.py" />
+        <option value="$PROJECT_DIR$/Code/DataCluster.py" />
+        <option value="$PROJECT_DIR$/Code/DataCleaner.py" />
+        <option value="$PROJECT_DIR$/Code/ControlMenu.py" />
+        <option value="$PROJECT_DIR$/Code/DataVisualizer.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="67" />
-    <option name="y" value="25" />
-    <option name="width" value="927" />
-    <option name="height" value="1055" />
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="680" />
+    <option name="y" value="27" />
+    <option name="width" value="917" />
+    <option name="height" value="789" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -146,7 +139,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -168,6 +160,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -193,7 +186,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.Main">
+  <component name="RunManager" selected="Python.ControlMenu">
     <configuration name="ControlMenu" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="BDA_Project2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -207,6 +200,48 @@
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
       <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/ControlMenu.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="DataCleaner" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BDA_Project2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/DataCleaner.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="DataVisualizer" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="BDA_Project2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Code" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/Code/DataVisualizer.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -259,8 +294,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.Main" />
         <item itemvalue="Python.ControlMenu" />
+        <item itemvalue="Python.DataVisualizer" />
+        <item itemvalue="Python.DataCleaner" />
+        <item itemvalue="Python.Main" />
         <item itemvalue="Python.pract" />
       </list>
     </recent_temporary>
@@ -288,7 +325,7 @@
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
       <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49945354" visible="true" weight="0.28401726" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.38146552" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.3812095" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -333,20 +370,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/DataVisualizer.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="114">
-          <caret line="6" column="12" selection-start-line="6" selection-start-column="12" selection-end-line="6" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Code/DataCluster.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/geoplotlib/core.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="212">
@@ -375,32 +398,56 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/pandas/core/generic.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="182">
+          <caret line="3885" selection-start-line="3885" selection-end-line="3885" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/Data_Import_And_Clean.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="152">
+          <caret line="8" column="18" lean-forward="true" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Code/DataCluster.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="193">
+          <caret line="57" column="25" selection-start-line="57" selection-start-column="25" selection-end-line="57" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Code/DataCleaner.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-8357">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        <state relative-caret-position="570">
+          <caret line="462" column="50" selection-start-line="462" selection-start-column="50" selection-end-line="462" selection-end-column="50" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/ControlMenu.py">
+    <entry file="file://$PROJECT_DIR$/Code/DataVisualizer.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+        <state relative-caret-position="280">
+          <caret line="27" column="24" lean-forward="true" selection-start-line="27" selection-start-column="24" selection-end-line="27" selection-end-column="24" />
           <folding>
-            <element signature="e#0#40#0" expanded="true" />
+            <element signature="e#0#18#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Code/Data_Import_And_Clean.py">
+    <entry file="file://$PROJECT_DIR$/Code/ControlMenu.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="573">
-          <caret line="941" lean-forward="true" selection-start-line="941" selection-end-line="941" />
+        <state relative-caret-position="2261">
+          <caret line="119" column="51" lean-forward="true" selection-start-line="119" selection-start-column="51" selection-end-line="119" selection-end-column="51" />
           <folding>
-            <element signature="e#0#15#0" expanded="true" />
+            <element signature="e#0#40#0" expanded="true" />
           </folding>
         </state>
       </provider>
