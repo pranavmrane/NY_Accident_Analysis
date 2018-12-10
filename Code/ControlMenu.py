@@ -3,6 +3,7 @@ from Code.DataVisualizer import DataVisualizer
 from Code.DataCluster import DataCluster
 import pandas as pd
 
+
 if __name__ == '__main__':
     import_object = DataCleaner()
 
@@ -111,8 +112,72 @@ if __name__ == '__main__':
     # #July 2018
     clustering_object.perform_clustering_kMeans(df_july_2018, "July 2018")
 
+
+    #View accident severity scores across NYC Boroughs:
+
+    # Calculate severity score like low cost for injury and high cost for death penalty
+    collisions_in_brooklyn_june_2017 = visualizer_object.severity_score_measure(df_june_2017)
+    # Perform kmeans choosing 15 centroids to find hotspots
+    centroids, labels = visualizer_object.get_centroids_clusters(collisions_in_brooklyn_june_2017, 15)
+
+    print(visualizer_object.map_collisions_visualize(collisions_in_brooklyn_june_2017,  # The list of collisions to plot
+                                   centroids=centroids,  # The centroids of collisions, chosen through kmeans
+                                   labels=labels,  # The list of which collisions belong to which centroid
+                                   only_show_num_collisions=0,
+                                   # Randomly pick only some collisions to show, for a cleaner map
+                                   output_file_name="june 2017"))
+
+    # July 2017
+    # Calculate severity score like low cost for injury and high cost for death penalty
+    collisions_in_brooklyn_july_2017 = visualizer_object.severity_score_measure(df_july_2017)
+    # Run kmeans with 15 centroids, find 15 'collision hotspots'
+    centroids, labels = visualizer_object.get_centroids_clusters(collisions_in_brooklyn_july_2017, 15)
+
+    print(visualizer_object.map_collisions_visualize(collisions_in_brooklyn_july_2017,  # The list of collisions to plot
+                                   centroids=centroids,  # The centroids of collisions, chosen through kmeans
+                                   labels=labels,  # The list of which collisions belong to which centroid
+                                   only_show_num_collisions=0,
+                                   # Randomly pick only some collisions to show, for a cleaner map
+                                   output_file_name="july_2017"))
+
+    # June 2018
+    # Calculate severity score like low cost for injury and high cost for death penalty
+    collisions_in_brooklyn_june_2018 = visualizer_object.severity_score_measure(df_june_2018)
+    # Run kmeans with 15 centroids, find 15 'collision hotspots'
+    centroids, labels = visualizer_object.get_centroids_clusters(collisions_in_brooklyn_june_2018, 15)
+
+    print(visualizer_object.map_collisions_visualize(collisions_in_brooklyn_june_2018,  # The list of collisions to plot
+                                   centroids=centroids,  # The centroids of collisions, chosen through kmeans
+                                   labels=labels,  # The list of which collisions belong to which centroid
+                                   only_show_num_collisions=0,
+                                   # Randomly pick only some collisions to show, for a cleaner map
+                                   output_file_name="june_2018"))
+
+    # July 2018
+    # Calculate severity score like low cost for injury and high cost for death penalty
+    collisions_in_brooklyn_july_2018 = visualizer_object.severity_score_measure(df_july_2018)
+    # Run kmeans with 15 centroids, find 15 'collision hotspots'
+    centroids, labels = visualizer_object.get_centroids_clusters(collisions_in_brooklyn_july_2018, 15)
+
+    print(visualizer_object.map_collisions_visualize(collisions_in_brooklyn_july_2018,  # The list of collisions to plot
+                                   centroids=centroids,  # The centroids of collisions, chosen through kmeans
+                                   labels=labels,  # The list of which collisions belong to which centroid
+                                   only_show_num_collisions=0,
+                                   # Randomly pick only some collisions to show, for a cleaner map
+                                   output_file_name="july_2018"))
+
+
+    #Visualize number of pedestrains killed/injured - for pedestrains safety
+    visualizer_object.view_number_of_pedestrains_killed(df_2017,df_2018)
+
+    #TODO Needed?
     # Visualize different factors - motorists, cyclists,pedestrians injured and killed for
     # june july 2017, 2018
+
+
+
+    #References:
+    #1)https://leafletjs.com/ -> Map Visualization of Accident Collisions using .js and .html
 
 
 """

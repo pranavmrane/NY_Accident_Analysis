@@ -6,7 +6,12 @@ from scipy.cluster.vq import kmeans2
 import warnings
 import datetime
 import numpy as np
+import os
+from os import path
+from colour import Color
 
+#MapBox API Token
+mapbox_access_token = 'pk.eyJ1IjoiYnVtYmxlYmVlY29kZXIiLCJhIjoiY2pwaGU2cjR2MHZxbjNxb2JvZzI5aThoNiJ9.B1uQr6MHRi3s2llorjLc9A'
 
 class DataVisualizer:
     # Class Should contain all the code to make graphs
@@ -68,12 +73,191 @@ class DataVisualizer:
         # plt.title("Accident Counts for June-July", year)
         plt.show()
 
-    # Optional
+
     def get_centroids_clusters(self, df, centres):
         location_data = df.loc[:, ['LATITUDE', 'LONGITUDE']]
         # Perform kMeans on data
         centroids, labels = kmeans2(location_data, centres)
         return centroids, labels
+
+    def severity_score_measure(self, df):
+        INJURY = 1
+        DEATH = 10
+        df['SEVERITY SCORE'] = 1
+        # For each injury, add to the score of the collision
+        df['SEVERITY SCORE'] += (df.loc[:, 'NUMBER OF PERSONS INJURED'] * INJURY)
+        # For each death, add to the score of the collision
+        df['SEVERITY SCORE'] += (df.loc[:, 'NUMBER OF PERSONS KILLED'] * DEATH)
+        return df
+
+    def map_collisions_visualize(self, data,
+                                 features=[],
+                                 heatmap=True,
+                                 centroids=None,
+                                 labels=None,
+                                 color_collisions_based_on_labels=None,
+                                 only_show_num_collisions=None,
+                                 output_file_name='map',
+                                 lat=40.77,
+                                 lon=-74.009725,
+                                 zoom=10):
+
+        prime_colors = ['Red', 'Blue', 'Purple', 'Green', 'Yellow', 'Cyan', 'Magenta', 'Black', 'White']
+
+        # Creating map files in form of .html
+        self.create_map_html_file(output_file_name)
+        self.create_map_script_file(output_file_name, lat, lon, zoom)
+
+        # create duplicate of data frame
+        collisions = data.copy().reset_index(drop=True)
+
+        if labels is not None:
+            # Append the labels of collision data
+            collisions = collisions.assign(LABELS=labels)
+
+        # Filter the collisions based on the list of features that were given
+        # If any features present
+        for feature in features:
+            print(feature)
+            collisions = collisions.loc[collisions[feature] == 1, :].reset_index(drop=True)
+
+        # After filtering, throw away the unneeded features
+        if labels is not None:
+            collisions = collisions.loc[:, ['LATITUDE', 'LONGITUDE', 'SEVERITY SCORE', 'LABELS']]
+        else:
+            collisions = collisions.loc[:, ['LATITUDE', 'LONGITUDE', 'SEVERITY SCORE']]
+
+        # Pick any number of collisions if specified in randomly
+        num_collisions_total = collisions.shape[0]
+        if only_show_num_collisions and only_show_num_collisions < num_collisions_total:
+            collisions_random = collisions.loc[np.random.choice(num_collisions_total,
+                                                                only_show_num_collisions,
+                                                                replace=False), :]
+            collisions = collisions_random[:only_show_num_collisions].reset_index(drop=True)
+
+        if heatmap:  # Plot with heatmap
+            # Get the color range
+            unique_severity_scores = sorted(collisions.loc[:, 'SEVERITY SCORE'].unique())
+            num_unique_severity_scores = len(unique_severity_scores)
+            colors = list(Color('Yellow').range_to('Red', num_unique_severity_scores))
+
+            # Plot each severity level with its own color
+            for index, score in enumerate(unique_severity_scores):
+                collisions_with_score = collisions.loc[collisions['SEVERITY SCORE'] == score, :]
+                self.writing_points_file(output_file_name, collisions_with_score, colors[index], 50)
+        elif labels is not None:  # Plot with color code
+            # Plot each center's points
+            color_to_use = Color('Blue')
+            for center in range(len(centroids)):
+                if color_collisions_based_on_labels and len(centroids) <= len(prime_colors):
+                    color_to_use = Color(prime_colors[center])
+                collisions_with_label = collisions.loc[collisions.loc[:, 'LABELS'] == center, :]
+                self.writing_points_file(output_file_name, collisions_with_label, color_to_use, 50)
+        else:
+            # Plot simple graph
+            self.writing_points_file(output_file_name, collisions, Color('Blue'), 50)
+
+        if centroids is not None:
+            # Plot the centroids
+            self.writing_points_file(output_file_name, centroids, Color('Orange'), 150)
+
+        # Generate map URL
+        map_url = self.get_map_output_url(output_file_name)
+
+        return map_url
+
+    def get_map_output_url(self,file_name):
+        return 'file://%s' % path.join(os.getcwd(), file_name + '.html')
+
+    def create_map_html_file(self, file_name):
+        page = """
+            <!DOCTYPE html>
+            <html>
+                <head>
+                    <title>TITLE</title>
+                    <meta charset="utf-8" />
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+                    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.2/dist/leaflet.css" />
+                    <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
+                </head>
+                <body>
+                    <div id="mapid" style="min-width: 800px; min-height: 600px;"></div>
+                    <script src="SCRIPT"></script>
+                </body>
+            </html>
+        """
+
+        page = page.replace("TITLE", file_name)
+        page = page.replace("SCRIPT", file_name + '.js')
+
+        with open(file_name + '.html', "w") as map_file:
+            map_file.write(page)
+
+    def create_map_script_file(self, file_name, lat, lon, zoom):
+
+        script = """    
+        var mymap = L.map('mapid').setView([LAT, LON], ZOOM);
+
+        L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=ACC_TOKEN', {
+            maxZoom: 18,
+            attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
+                '<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
+                'Imagery © <a href="http://mapbox.com">Mapbox</a>',
+            id: 'mapbox.streets'
+        }).addTo(mymap);
+        """
+        script = script.replace("LAT", str(lat))
+        script = script.replace("LON", str(lon))
+        script = script.replace("ZOOM", str(zoom))
+        script = script.replace("ACC_TOKEN", mapbox_access_token)
+
+        with open(file_name + '.js', "w") as script_file:
+            script_file.write(script)
+
+    def writing_points_file(self, file_name, points, color, size):
+
+        point_js = """
+        L.circle([LAT, LON], SIZE, {
+            color: 'COLOR',
+            fillColor: 'COLOR',
+            fillOpacity: 0.5
+        }).addTo(mymap);
+        """
+
+        point_js = point_js.replace('SIZE', str(size))
+        point_js = point_js.replace('COLOR', str(color.hex))
+
+        if type(points) == pd.DataFrame:
+            points = points.loc[:, ['LATITUDE', 'LONGITUDE']].values
+
+        with open(file_name + '.js', "a") as script_file:
+            for lat, lon in points:
+                new_point_js = point_js.replace('LAT', str(lat))
+                new_point_js = new_point_js.replace('LON', str(lon))
+                script_file.write(new_point_js)
+
+
+    def view_number_of_pedestrains_killed(self, df_2017, df_2018):
+        persons_killed = df_2017['NUMBER OF PERSONS KILLED'].replace(np.NaN, 'OTHER')
+        kill_count = {}
+        for val in df_2017['DATE'].unique():
+            temp = df_2017.loc[df_2017['DATE'].isin([val])]
+            kill_count[val] = int(temp['NUMBER OF PERSONS KILLED'].sum(axis=0))
+
+        plt.bar(kill_count.keys(), kill_count.values())
+        print(kill_count.keys(), kill_count.values())
+        plt.show()
+
+        persons_killed = df_2018['NUMBER OF PERSONS KILLED'].replace(np.NaN, 'OTHER')
+        kill_count = {}
+        for val in df_2018['DATE'].unique():
+            temp = df_2018.loc[df_2018['DATE'].isin([val])]
+            kill_count[val] = int(temp['NUMBER OF PERSONS KILLED'].sum(axis=0))
+
+        plt.bar(kill_count.keys(), kill_count.values())
+        print(kill_count.keys(), kill_count.values())
+        plt.show()
 
     def high_processing(self, df_2017, df_2018):
         # Parsing and retrieving from 2017 Dataset
