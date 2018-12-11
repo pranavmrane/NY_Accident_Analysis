@@ -29,7 +29,7 @@ class DataVisualizer:
     # Borough selection decision should also be made here
     def __init__(self):
         plt.style.use('ggplot')
-        warnings.filterwarnings("ignore", category=DeprecationWarning) 
+        warnings.filterwarnings("ignore", category=DeprecationWarning)  # Priya
 
     def make_date_time(self, dataset):
         """
