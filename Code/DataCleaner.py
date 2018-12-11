@@ -1,3 +1,14 @@
+"""
+CSCI720 Project 2
+Name:DataCleaner.py
+Program to evaluate , provide evidence of learning and
+understanding of assignment on NYC Traffic Collisions
+Date: 1st Dec 2018
+Authors:Priyanka Patil (pxp1439@rit.edu)
+Authors: Pranav Rane (pmr5279@rit.edu)
+"""
+
+
 import pandas as pd
 import geocoder
 from uszipcode import SearchEngine
@@ -470,3 +481,4 @@ class DataCleaner:
             filtered_data_lat_lon_added)
         # print(filtered_data_borough_added.isna().any())
         return filtered_data_borough_added
+

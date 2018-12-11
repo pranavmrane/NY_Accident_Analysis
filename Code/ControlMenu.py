@@ -1,3 +1,12 @@
+"""
+CSCI720 Project 2
+NAme: ControlMenu.py (Main)
+Program to evaluate , provide evidence of learning and
+understanding of assignment on NYC Traffic Collisions
+Date: 1st Dec 2018
+Authors:Priyanka Patil (pxp1439@rit.edu)
+Authors: Pranav Rane (pmr5279@rit.edu)
+"""
 from Code.DataCleaner import DataCleaner
 from Code.DataVisualizer import DataVisualizer
 from Code.DataCluster import DataCluster
@@ -39,11 +48,8 @@ if __name__ == '__main__':
     df_2018 = visualizer_object.make_date_time(df_2018)
 
     # Printing no of rows and columns
-    print(df_2017.shape)
-    print(df_2018.shape)
-
-    # visualize_accident_collisions_heatmap(df_2017)
-    # visualize_accident_collisions_heatmap(df_2017)
+    # print(df_2017.shape)
+    # print(df_2018.shape)
 
     df_2017, df_2018 = visualizer_object.high_processing(df_2017, df_2018)
 
@@ -86,35 +92,32 @@ if __name__ == '__main__':
         vehicle_factor_count_june_2018,
         vehicle_factor_count_july_2018)
 
-    # # Visualize heatmap for  june 2017
+    #  Visualize heatmap for  june 2017
     clustering_object.visualize_heatmap_for_data(df_june_2017)
-    #
-    #
-    # # Visualize heatmap for  july 2017
+
+    #  Visualize heatmap for  july 2017
     clustering_object.visualize_heatmap_for_data(df_june_2017)
-    #
-    #
-    # # #Similarily for june 2018
+
+    # Similarily for june 2018
     clustering_object.visualize_heatmap_for_data(df_june_2018)
-    #
-    # # #Similarily for june 2018
+
+    # Similarily for june 2018
     clustering_object.visualize_heatmap_for_data(df_july_2018)
 
     # Clustering of June 2017 , july 2018, june 2018,july 2018
-    clustering_object.perform_clustering_kMeans(df_june_2017, "June 2017")
-    # #
-    # # Clustering 2017 july
-    clustering_object.perform_clustering_kMeans(df_july_2017, "July 2017")
+    clustering_object.perform_clustering_kMeans(df_june_2017, " Results for Clustering under June 2017")
+
+    #Clustering 2017 july
+    clustering_object.perform_clustering_kMeans(df_july_2017, " Results for Clustering under July 2017")
+
+    # Clustering June 2018
+    clustering_object.perform_clustering_kMeans(df_june_2018, "  Results for Clustering under June 2018")
     #
-    # #Clustering June 2018
-    clustering_object.perform_clustering_kMeans(df_june_2018, "June 2018")
-    #
-    # #July 2018
-    clustering_object.perform_clustering_kMeans(df_july_2018, "July 2018")
+    # Similarily for July 2018
+    clustering_object.perform_clustering_kMeans(df_july_2018, " Results for Clustering under July 2018")
 
 
     #View accident severity scores across NYC Boroughs:
-
     # Calculate severity score like low cost for injury and high cost for death penalty
     collisions_in_brooklyn_june_2017 = visualizer_object.severity_score_measure(df_june_2017)
     # Perform kmeans choosing 15 centroids to find hotspots
@@ -168,16 +171,26 @@ if __name__ == '__main__':
 
 
     #Visualize number of pedestrains killed/injured - for pedestrains safety
-    visualizer_object.view_number_of_pedestrains_killed(df_2017,df_2018)
+    # visualizer_object.view_number_of_pedestrains_killed(df_2017,df_2018)
 
-    #TODO Needed?
-    # Visualize different factors - motorists, cyclists,pedestrians injured and killed for
+
+    # Visualize different factors - pedestrians injured and killed for
     # june july 2017, 2018
+    pedestrains_injured = visualizer_object.get_count_pedestrains(df_june_2017, 'NUMBER OF PEDESTRIANS INJURED', 'June2017')
 
+    pedestrains_killed = visualizer_object.get_count_pedestrains(df_june_2017, 'NUMBER OF PEDESTRIANS KILLED', 'June2017')
 
+    pedestrains_injured = visualizer_object.get_count_pedestrains(df_july_2017, 'NUMBER OF PEDESTRIANS INJURED',
+                                                'July2017')
+    pedestrains_killed = visualizer_object.get_count_pedestrains(df_july_2017, 'NUMBER OF PEDESTRIANS KILLED', 'July2017')
 
-    #References:
-    #1)https://leafletjs.com/ -> Map Visualization of Accident Collisions using .js and .html
+    pedestrains_injured = visualizer_object.get_count_pedestrains(df_june_2018, 'NUMBER OF PEDESTRIANS INJURED',
+                                                'June2018')
+    pedestrains_killed = visualizer_object.get_count_pedestrains(df_june_2018, 'NUMBER OF PEDESTRIANS KILLED', 'June2018')
+
+    pedestrains_injured = visualizer_object.get_count_pedestrains(df_july_2018, 'NUMBER OF PEDESTRIANS INJURED',
+                                                'July2018')
+    pedestrains_killed = visualizer_object.get_count_pedestrains(df_july_2018, 'NUMBER OF PEDESTRIANS KILLED', 'July2018')
 
 
 """
