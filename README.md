@@ -1,4 +1,5 @@
-# NY_Accident_Analysis
+# NY Accident Analysis
+The requirements for the project are specified in Documentation folder.
 
 ## Prerequisites
 
