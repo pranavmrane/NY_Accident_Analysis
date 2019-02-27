@@ -7,7 +7,6 @@ Date: 1st Dec 2018
 Authors:Priyanka Patil (pxp1439@rit.edu)
 Authors: Pranav Rane (pmr5279@rit.edu)
 """
-
 import collections
 import operator
 import matplotlib.pyplot as plt
@@ -29,7 +28,7 @@ class DataVisualizer:
     # Borough selection decision should also be made here
     def __init__(self):
         plt.style.use('ggplot')
-        warnings.filterwarnings("ignore", category=DeprecationWarning) 
+        warnings.filterwarnings("ignore", category=DeprecationWarning)
 
     def make_date_time(self, dataset):
         """
@@ -106,7 +105,7 @@ class DataVisualizer:
                    , borough_accident_.keys())
         plt.xlabel("Borough Names")
         plt.ylabel("Accidents Count")
-        # TODO: Fix plt title
+
         # plt.gcf().set_size_inches(11,11)
         title = "Accident Counts for June-July" + year
         plt.title(title)
@@ -133,8 +132,8 @@ class DataVisualizer:
         :param df: Dataset
         :return: Dataset with assigned severity score for every factors
         """
-        INJURY = 1
-        DEATH = 10
+        INJURY = 10
+        DEATH = 100
         df['SEVERITY SCORE'] = 1
         # For each injury, add to the score of the collision
         df['SEVERITY SCORE'] += (df.loc[:, 'NUMBER OF PERSONS INJURED'] * INJURY)
@@ -210,8 +209,10 @@ class DataVisualizer:
 
             # Plot each severity level with its own color
             for index, score in enumerate(unique_severity_scores):
-                collisions_with_score = collisions.loc[collisions['SEVERITY SCORE'] == score, :]
-                self.writing_points_file(output_file_name, collisions_with_score, colors[index], 50)
+                    collisions_with_score = collisions.loc[collisions['SEVERITY SCORE'] == score, :]
+                    # print(collisions_with_score)
+
+                    self.writing_points_file(output_file_name, collisions_with_score, colors[index], 50)
         elif labels is not None:  # Plot with color code
             # Plot each center's points
             color_to_use = Color('Blue')
@@ -224,9 +225,9 @@ class DataVisualizer:
             # Plot simple graph
             self.writing_points_file(output_file_name, collisions, Color('Blue'), 50)
 
-        if centroids is not None:
-            # Plot the centroids
-            self.writing_points_file(output_file_name, centroids, Color('Orange'), 150)
+        # if centroids is not None:
+        #     # Plot the centroids
+        #     self.writing_points_file(output_file_name, centroids, Color('Orange'), 150)
 
         # Generate map URL
         map_url = self.get_map_output_url(output_file_name)
@@ -260,7 +261,7 @@ class DataVisualizer:
                     <script src="https://unpkg.com/leaflet@1.0.2/dist/leaflet.js"></script>
                 </head>
                 <body>
-                    <div id="mapid" style="min-width: 800px; min-height: 600px;"></div>
+                    <div id="mapid" style="min-width: 800px; min-height: 800px;"></div>
                     <script src="SCRIPT"></script>
                 </body>
             </html>
@@ -378,7 +379,7 @@ class DataVisualizer:
                 lat = float(lat)
                 lng = float(lng)
                 list_count.append(((lng, lat), each_value))
-        print(len(list_count), ' collisions has ', topic.lower())
+        print(len(list_count), ' collisions has ', topic.lower(), 'in', monthyear)
         count = collections.Counter(list_count)
 
         min_lat, max_lat, min_lon, max_lon = \
@@ -402,7 +403,7 @@ class DataVisualizer:
 
 
         mymap.scatter(newdf['lat'], newdf['lon'], 'blue', edge_width=4)
-        mymap.draw(topic.lower() + monthyear + '.html')
+        mymap.draw(topic.lower() + ' '+ monthyear + '.html')
 
 
     def high_processing(self, df_2017, df_2018):
@@ -489,17 +490,25 @@ class DataVisualizer:
             borough_accident_2018,
             "2018")
 
-        # Heatmap
+
+        # We decided to choose borough - 'Brooklyn'
+        df_2017 = df_2017[df_2017['BOROUGH'] == 'BROOKLYN']
+        df_2018 = df_2018[df_2018['BOROUGH'] == 'BROOKLYN']
+
+        # Heatmap Showing Brooklyn for June July 2017 vs Brooklyn June July 2018:
         heatmap, x_edges, y_edges = np.histogram2d(df_2017['LONGITUDE']
                                                    , df_2017['LATITUDE'],
                                                    bins=100)
         extent = [x_edges[0], x_edges[-1], y_edges[0], y_edges[-1]]
 
         plt.clf()
-        plt.imshow(heatmap.T, extent=extent, origin='lower', cmap='copper')
+        plt.imshow(heatmap.T, extent=extent, origin='lower', cmap='Greys')
         plt.colorbar()
-        plt.axis(aspect='image')
-        plt.title('Heat map of June & july 2017')
+        plt.xlabel("Longitude")
+        plt.ylabel("Latitude")
+        plt.axis(aspect='auto')
+        plt.grid(False)
+        plt.title('Heat map of June & July 2017')
         plt.show()
 
         heatmap, xedges, yedges = np.histogram2d(df_2018['LONGITUDE']
@@ -508,23 +517,14 @@ class DataVisualizer:
         extent = [xedges[0], xedges[-1], yedges[0], yedges[-1]]
 
         plt.clf()
-        plt.imshow(heatmap.T, extent=extent, origin='lower', cmap='copper')
+        plt.imshow(heatmap.T, extent=extent, origin='lower', cmap='Greys')
         plt.colorbar()
-        plt.axis(aspect='image')
-        plt.title('Heat map of June & july 2018')
+        plt.xlabel("Longitude")
+        plt.ylabel("Latitude")
+        plt.axis(aspect='auto')
+        plt.grid(False)
+        plt.title('Heat map of June & July 2018')
         plt.show()
 
-        # visualize different factors causing accidents groupby boroughs
-        # df_2017['COUNTER'] = 1
-        # df_2018['COUNTER'] = 1
-        # group_2017 = df_2017.groupby(['BOROUGH', 'NUMBER OF PERSONS KILLED'])[
-        #     'COUNTER'].sum()
-        # group_2018 = df_2018.groupby(['BOROUGH', 'NUMBER OF PERSONS KILLED'])[
-        #     'COUNTER'].sum()
-
-        # We decided to choose borough - 'Brooklyn'
-        df_2017 = df_2017[df_2017['BOROUGH'] == 'BROOKLYN']
-        df_2018 = df_2018[df_2018['BOROUGH'] == 'BROOKLYN']
 
         return df_2017, df_2018
-

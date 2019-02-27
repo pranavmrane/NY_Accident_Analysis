@@ -9,6 +9,7 @@ Authors: Pranav Rane (pmr5279@rit.edu)
 """
 
 #imports
+import datetime
 from sklearn.cluster import KMeans
 import matplotlib.pyplot as plt
 import numpy as np
@@ -34,8 +35,9 @@ class DataCluster:
         :return: None
         """
         plt.title("Vehicle Accidents Occurance Distribution ")
-        df = pd.DataFrame(
-            {'x': range(1, 54),
+
+        df = pd.DataFrame({
+              'x': range(1, 54),
              'Brooklyn June 2017': df_june_2017,
              'Brooklyn July 2017': df_july_2017,
              'Brooklyn June 2018': df_june_2018,
@@ -51,14 +53,28 @@ class DataCluster:
 
     def perform_clustering_kMeans(self, df, title):
         """
-        k-Means Clsutering on Brookyln to get clusters of
+        k-Means Clustering on Brookyln to get clusters of
         various sizes and splitting into 4 clusters
         :param df: dataset having Latitude, Longitude, Severity Score
         :param title: Title of plot to show
         :return: None
         """
         # # filtering the dataset and save the coordinates
-        data = df.filter(items=['LATITUDE', 'LONGITUDE', 'SEVERITY SCORE'])
+        df_ = df.copy()
+        print(type(df['TIME']))
+        for index, row in df_.iterrows():
+            time_hours = row['TIME']
+            # df_['time_diff'] = df.groupby('SEVERITY SCORE')['_TIME'].diff()
+            # Time
+            if ':' in time_hours:
+                time_hour = time_hours.split(":")
+                df_['_TIME'] = (int(time_hour[0]))  # it tkes an hour
+
+
+        print(type(df['_TIME']))
+        data = df_.filter(items=['SEVERITY SCORE', '_TIME'])
+        print(data) #it throw error
+
         # turn into a numpy array
         kmeans_array = np.array(data)
 
@@ -105,12 +121,11 @@ class DataCluster:
         This is due to mystery result, so to avoid this, it is done removing
         unspecified values.
         :param dataset: Dataset having all factors
-        :return: count of factor 1 values
+        :return: count of factor 1 type values
         """
-        vehicle_factor_count = dataset.loc[
-            (dataset['CONTRIBUTING FACTOR VEHICLE 1'] != 'Unspecified')]
+        vehicle_factor_count = \
+            dataset.loc[(dataset['CONTRIBUTING FACTOR VEHICLE 1'] != 'Unspecified') ]
         vehicle_factor_count = vehicle_factor_count[
-            'CONTRIBUTING FACTOR VEHICLE 1'].value_counts()
+                'CONTRIBUTING FACTOR VEHICLE 1'].value_counts()
 
         return vehicle_factor_count
-
